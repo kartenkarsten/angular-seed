@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NameListService } from '../shared/name-list/name-list.service';
+import  * as L from 'leaflet';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
   newName: string = '';
   errorMessage: string;
   names: any[] = [];
+  options: any;
 
   /**
    * Creates an instance of the HomeComponent with the injected
@@ -22,7 +24,21 @@ export class HomeComponent implements OnInit {
    *
    * @param {NameListService} nameListService - The injected NameListService.
    */
-  constructor(public nameListService: NameListService) {}
+  constructor(public nameListService: NameListService) {
+    this.options = {
+          layers: [
+            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 18,
+              attribution: '...'
+            })
+          ],
+          zoom: 5,
+          center: L.latLng({
+            lat: 38.991709,
+            lng: -76.886109
+          })
+    };
+  }
 
   /**
    * Get the names OnInit

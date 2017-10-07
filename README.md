@@ -40,6 +40,11 @@ In order to start the seed use:
 
 
 ```bash
+$ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+# or on Arch Linux [details](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers#the-technical-details)
+echo "fs.inotify.max_user_watches=524288" >> /etc/sysctl.d/99-sysctl.conf
+sysctl --system
+
 $ git clone --depth 1 https://github.com/mgechev/angular-seed.git
 $ cd angular-seed
 
